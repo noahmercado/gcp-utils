@@ -17,7 +17,6 @@
 CURRENT_PROJECT=$(gcloud config get-value project)
 AVAILABLE_SERVICES=$(gcloud services list --available --format="value(config.name)")
 NUMBER_OF_AVAILABLE_SERVICES=$(echo "$AVAILABLE_SERVICES" | wc -l | tr -d '[:space:]')
-echo $NUMBER_OF_AVAILABLE_SERVICES
 
 validate_continue() {
     read -p "This script will enable ${NUMBER_OF_AVAILABLE_SERVICES} services for the GCP project ${CURRENT_PROJECT}. Are you sure you want to continue? [y/N]: " user_response 
