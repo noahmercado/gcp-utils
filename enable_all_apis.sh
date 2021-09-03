@@ -14,8 +14,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-for SERVICE in $(gcloud services list --available --format="value(config.name)")
-do
-    echo "enabling $SERVICE..."
-    gcloud services enable --async $SERVICE
-done
+CURRENT_PROJECT=$(gcloud config get-value project)
+AVAILABLE_SERVICES=$(gcloud services list --available --format="value(config.name)")
+NUMBER_OF_AVAILABLE_SERVICES=$(echo "$AVAILABLE_SERVICES" | wc -l | tr -d '[:space:]')
+echo $NUMBER_OF_AVAILABLE_SERVICES
+
+validate_continue() {
+    read -p "This script will enable ${NUMBER_OF_AVAILABLE_SERVICES} services for the GCP project ${CURRENT_PROJECT}. Are you sure you want to continue? [y/N]: " user_response 
+
+    if [[ "$user_response" != "y" ]]
+    then
+        echo "Quitting..."
+        exit 0
+    fi
+}
+
+enable_all_apis() {
+    for SERVICE in $AVAILABLE_SERVICES
+    do
+        echo "enabling $SERVICE for $CURRENT_PROJECT..."
+        gcloud services enable --async $SERVICE
+    done
+}
+
+validate_continue
+enable_all_apis
