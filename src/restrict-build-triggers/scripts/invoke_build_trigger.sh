@@ -14,12 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-PROJECT_ID=$(gcloud config get-value project)
 CURRENT_USER=$(gcloud config get-value account)
-CURRENT_GIT_BRANCH=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
 CURRENT_PROJECT=$(gcloud config get-value project)
 CURRENT_ORG_ID=$(gcloud projects get-ancestors ${CURRENT_PROJECT} | grep organization | cut -d ' ' -f1)
 CURRENT_ORG_NAME=$(gcloud organizations describe ${CURRENT_ORG_ID} --format="value(displayName)")
+CURRENT_GIT_BRANCH=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
 
 function usage() {
     cat <<EOT
