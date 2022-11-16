@@ -17,6 +17,9 @@
 PROJECT_ID=$(gcloud config get-value project)
 CURRENT_USER=$(gcloud config get-value account)
 CURRENT_GIT_BRANCH=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD)
+CURRENT_PROJECT=$(gcloud config get-value project)
+CURRENT_ORG_ID=$(gcloud projects get-ancestors ${CURRENT_PROJECT} | grep organization | cut -d ' ' -f1)
+CURRENT_ORG_NAME=$(gcloud organizations describe ${CURRENT_ORG_ID} --format="value(displayName)")
 
 function usage() {
     cat <<EOT
@@ -66,7 +69,7 @@ function get_args() {
 function user_is_in_group() {
     local __group=$1
     local __resultvar=$2
-    local membership=$(gcloud identity groups memberships check-transitive-membership --group-email="${__group}@noahmercado.altostrat.com" --member-email="${CURRENT_USER}" 2> /dev/null || echo "hasMembership: false")
+    local membership=$(gcloud identity groups memberships check-transitive-membership --group-email="${__group}@${CURRENT_ORG_NAME}" --member-email="${CURRENT_USER}" 2> /dev/null || echo "hasMembership: false")
     local result=$(echo $membership | yq .hasMembership )
     eval $__resultvar="'${result}'"
 }
