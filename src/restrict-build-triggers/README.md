@@ -25,9 +25,9 @@ This solution does not actually remove a team's permissions / ability to invoke 
 - Switch to the git branch that this trigger should be run on and ensure all code changes are pushed upstream
     - i.e. git checkout `$YOUR_BRANCH_NAME`
     - git push
-- From the root of your repository, run the following command while substituing our the `YOUR_TRIGGER_NAME` and `TRIGGER_REGION` vars for those values of your respective trigger:
+- From the root of your repository, run the following command while substituing out the `YOUR_TRIGGER_NAME` and `TRIGGER_REGION` vars for those values of your respective trigger:
 
 ```bash
 make trigger trigger=${YOUR_TRIGGER_NAME} region=${TRIGGER_REGION}
 ```
-- The Makefile + script will verify that the currently authenticated gcloud user is a member of at least one of the Google Groups `${YOUR_TRIGGER_NAME}` that is tagged with. If they are not, an error message will appear and the trigger will not be invoked. If they are, the trigger invocation will proceed for the current branch the user has checked out. 
+- The Makefile + script will verify that the currently authenticated gcloud user is a member of at least one of the Google Groups that `${YOUR_TRIGGER_NAME}` is tagged with. If they are not, an error message will appear and the trigger will not be invoked. If they are, the trigger invocation will proceed for the current branch the user has checked out. 
