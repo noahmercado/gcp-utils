@@ -13,6 +13,7 @@ This solution does not actually remove a team's permissions / ability to invoke 
   
 ## Usage
 - Tag each of your Cloud Build Triggers with the respective Google Group name of whoever should be able to invoke the trigger (note that the tag must actually be an existing Google Group and the users that should have the ability to invoke that trigger should be members of that group
+  - ![Tag](../../assets/tag-build-trigger.png "Tag Build Trigger")  
 - Embed this [Makefile](./Makefile) and this [scripts](./scripts/) directory into the root of your repository
 - Instruct developers to only invoke Cloud Build Triggers using the Makefile
 - Switch to the git branch that this trigger should be run on and ensure all code changes are pushed upstream
