@@ -7,6 +7,12 @@ This repository serves as a stop gap to prevent development teams from invoking 
 ## Google Disclaimer
 This is not an officially supported Google product
   
+## Dependencies
+- `gcloud cli >= 409.0.0`
+- gcloud beta component installed
+    - `gcloud components install beta`  
+- `yq >= 4.27.2`
+  
 ## Notice!
 This solution does not actually remove a team's permissions / ability to invoke another team's triggers. Instead it provides a consistent trigger invocation interface that has logic baked in to prevent accidental invocation of someone else's triggers. If someone were to circumvent using this script / Makefile (i.e. invoke a Build Trigger via the UI or directly via the gcloud CLI), they would still have the ability to invoke any trigger.
   
