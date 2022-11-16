@@ -24,3 +24,4 @@ This solution does not actually remove a team's permissions / ability to invoke 
 ```bash
 make trigger trigger=${YOUR_TRIGGER_NAME} region=${TRIGGER_REGION}
 ```
+- The Makefile + script will verify that the currently authenticated gcloud user is a member of at least one of the Google Groups `${YOUR_TRIGGER_NAME}` that is tagged with. If they are not, an error message will appear and the trigger will not be invoked. If they are, the trigger invocation will proceed. 
